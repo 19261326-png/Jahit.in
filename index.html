@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Jahit.in | Kreasi Kain Perca Handmade untuk Pelajar & Mahasiswa</title>
+
+    <!-- Google Fonts: Fredoka & Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FFFDF9',
+                        'craft-pink': '#FFD6E5',
+                        'craft-pink-dark': '#F9B8D0',
+                        'craft-blue': '#CBE8FF',
+                        'craft-blue-dark': '#9AD0FF',
+                        'craft-yellow': '#FFF0B3',
+                        'craft-yellow-dark': '#FFE066',
+                        'craft-brown': '#5C3A21',
+                        'craft-brown-light': '#8C583A',
+                        'craft-brown-soft': '#E6D5C8',
+                    },
+                    fontFamily: {
+                        display: ['Fredoka', 'sans-serif'],
+                        sans: ['Nunito', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS untuk tekstur kain, jahitan tangan, dan animasi lembut -->
+    <style>
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #FFFDF9;
+            color: #5C3A21;
+            background-image: radial-gradient(#E6D5C8 0.85px, transparent 0.85px);
+            background-size: 22px 22px;
+        }
+
+        /* Aksen Garis Jahitan Tangan (Dashed Stitch) */
+        .stitch-box {
+            position: relative;
+        }
+
+        .stitch-box::after {
+            content: '';
+            position: absolute;
+            inset: 6px;
+            border: 2px dashed rgba(92, 58, 33, 0.35);
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        /* Pola tekstur kain halus pada blok warna */
+        .fabric-texture {
+            background-image:
+                repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.24) 0px, rgba(255, 255, 255, 0.24) 2px, transparent 2px, transparent 6px),
+                repeating-linear-gradient(-45deg, rgba(92, 58, 33, 0.04) 0px, rgba(92, 58, 33, 0.04) 2px, transparent 2px, transparent 6px);
+        }
+
+        /* Label kain kecil */
+        .fabric-tag {
+            box-shadow: 2px 2px 0px #5C3A21;
+        }
+
+        /* Animasi melayang lembut untuk ilustrasi hero */
+        @keyframes floatSlow {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-6px) rotate(0.6deg);
+            }
+        }
+
+        .animate-float {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-float {
+                animation: none;
+            }
+        }
+
+        /* Animasi muncul saat di-scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body
+    class="font-sans antialiased selection:bg-craft-pink selection:text-craft-brown w-full max-w-full overflow-x-hidden">
+
+    <!-- ==========================================
+         1. NAVBAR RESPONSIF
+    =========================================== -->
+    <header
+        class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md border-b-2 border-dashed border-craft-brown-soft w-full">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 sm:h-20 gap-2">
+                <!-- Logo Brand Jahit.in -->
+                <a href="#beranda" class="flex items-center gap-2.5 sm:gap-3 group min-w-0">
+                    <div class="w-28 h-28 items-center justify-center group-hover:rotate-6 transition-transform">
+                        <!-- Ikon Kancing & Benang Jahit SVG -->
+                        <img src="jahitin.png" alt="" class="">
+                    </div>
+                    <div class="min-w-0">
+                        <!-- <span
+                            class="font-display font-bold text-xl sm:text-2xl tracking-tight text-craft-brown block leading-none truncate">
+                            Jahit<span class="text-craft-pink-dark">.in</span>
+                        </span> -->
+                        <span
+                            class="font-display font-bold text-xl sm:text-2xl tracking-tight text-craft-brown block leading-none truncate">Handmade
+                            Perca Craft</span>
+                    </div>
+                </a>
+
+                <!-- Menu Desktop -->
+                <nav class="hidden md:flex items-center gap-6 lg:gap-7">
+                    <a href="#beranda"
+                        class="text-sm font-bold text-craft-brown hover:text-craft-brown-light transition-colors py-1.5 border-b-2 border-transparent hover:border-craft-pink-dark">Beranda</a>
+                    <a href="#tentang-kami"
+                        class="text-sm font-bold text-craft-brown hover:text-craft-brown-light transition-colors py-1.5 border-b-2 border-transparent hover:border-craft-blue-dark">About
+                        Us</a>
+                    <a href="#katalog"
+                        class="text-sm font-bold text-craft-brown hover:text-craft-brown-light transition-colors py-1.5 border-b-2 border-transparent hover:border-craft-yellow-dark">Katalog
+                        & Harga</a>
+                    <a href="#kontak"
+                        class="min-h-[44px] px-5 py-2.5 rounded-full bg-craft-brown text-cream text-sm font-bold hover:bg-craft-brown-light transition-all shadow-sm flex items-center gap-2">
+                        <span>Kontak</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                </nav>
+
+                <!-- Tombol Hamburger Mobile (min 44x44px touch target) -->
+                <button id="mobile-menu-btn" type="button" aria-label="Buka atau Tutup Menu" aria-expanded="false"
+                    aria-controls="mobile-menu"
+                    class="md:hidden min-w-[44px] min-h-[44px] p-2.5 rounded-xl bg-craft-pink/60 border-2 border-craft-brown/35 text-craft-brown hover:bg-craft-pink active:scale-95 transition-all flex items-center justify-center shrink-0">
+                    <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dropdown Menu Mobile -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-cream border-b-2 border-dashed border-craft-brown-soft px-4 pt-2 pb-5 space-y-2 shadow-lg w-full">
+            <a href="#beranda"
+                class="mobile-link min-h-[44px] flex items-center px-4 py-2.5 rounded-xl font-bold text-sm text-craft-brown hover:bg-craft-pink/40 active:bg-craft-pink/60">Beranda</a>
+            <a href="#tentang-kami"
+                class="mobile-link min-h-[44px] flex items-center px-4 py-2.5 rounded-xl font-bold text-sm text-craft-brown hover:bg-craft-blue/40 active:bg-craft-blue/60">About
+                Us</a>
+            <a href="#katalog"
+                class="mobile-link min-h-[44px] flex items-center px-4 py-2.5 rounded-xl font-bold text-sm text-craft-brown hover:bg-craft-yellow/60 active:bg-craft-yellow/80">Katalog
+                & Harga</a>
+            <a href="#kontak"
+                class="mobile-link min-h-[44px] flex items-center justify-center px-4 py-3 rounded-xl font-bold text-sm bg-craft-brown text-cream text-center mt-2">Kontak
+                & Pesan</a>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         2. HERO SECTION
+    =========================================== -->
+    <section id="beranda" class="relative pt-8 pb-16 sm:pt-12 sm:pb-20 lg:pt-14 lg:pb-24 overflow-hidden w-full">
+        <!-- Dekorasi Perca Melayang -->
+        <div
+            class="hidden sm:block absolute top-10 left-4 lg:left-8 w-14 h-14 lg:w-16 lg:h-16 rounded-2xl bg-craft-pink/70 rotate-12 stitch-box pointer-events-none">
+        </div>
+        <div
+            class="hidden sm:block absolute bottom-14 left-1/3 w-12 h-12 rounded-full bg-craft-blue/70 -rotate-12 stitch-box pointer-events-none">
+        </div>
+        <div
+            class="hidden lg:block absolute top-20 right-12 w-20 h-20 rounded-3xl bg-craft-yellow/80 rotate-6 stitch-box pointer-events-none">
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+                <!-- Kolom Teks Hero -->
+                <div class="lg:col-span-6 space-y-5 sm:space-y-6 text-center lg:text-left min-w-0">
+                    <div
+                        class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-craft-yellow/80 border-2 border-dashed border-craft-brown text-xs sm:text-sm font-extrabold text-craft-brown shadow-sm max-w-full">
+                        <span class="w-2.5 h-2.5 shrink-0 rounded-full bg-craft-pink-dark animate-pulse"></span>
+                        <span class="truncate">Handmade Perca Craft • Mulai Rp 4.999</span>
+                    </div>
+
+                    <h1
+                        class="font-display font-bold text-[1.85rem] sm:text-4xl md:text-5xl lg:text-[52px] text-craft-brown leading-[1.18] sm:leading-[1.15] break-words">
+                        Kain Perca Unik Jadi Aksesori
+                        <span
+                            class="relative inline-block px-2.5 sm:px-3 py-0.5 mx-0.5 sm:mx-1 bg-craft-pink rounded-2xl border-2 border-dashed border-craft-brown -rotate-1">
+                            Lucu & Fungsional
+                        </span>
+                    </h1>
+
+                    <p
+                        class="text-sm sm:text-base lg:text-lg text-craft-brown-light font-medium leading-relaxed max-w-xl mx-auto lg:mx-0">
+                        <strong>Jahit.in</strong> mengolah kain bekas menjadi aksesori harian yang praktis dan estetik
+                        untuk pelajar serta mahasiswa, sambil bantu kurangi limbah kain.
+                    </p>
+
+                    <div
+                        class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-1 sm:pt-2">
+                        <a href="#katalog"
+                            class="w-full sm:w-auto min-h-[48px] px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-craft-brown text-cream font-display font-semibold text-sm sm:text-base hover:bg-craft-brown-light transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                            <span>Katalog & Harga</span>
+                            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </a>
+                        <a href="#kontak"
+                            class="w-full sm:w-auto min-h-[48px] px-6 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-craft-blue/60 hover:bg-craft-blue text-craft-brown border-2 border-dashed border-craft-brown font-display font-semibold text-sm sm:text-base transition-all flex items-center justify-center">
+                            Pesan Sekarang
+                        </a>
+                    </div>
+
+                    <!-- Highlight Singkat -->
+                    <div
+                        class="pt-4 sm:pt-5 grid grid-cols-3 gap-2 sm:gap-3 border-t-2 border-dashed border-craft-brown-soft max-w-md mx-auto lg:mx-0">
+                        <div
+                            class="bg-white/85 p-2 sm:p-2.5 rounded-xl border border-craft-brown-soft text-center min-w-0">
+                            <p class="font-display font-bold text-base sm:text-xl text-craft-brown truncate">6 Produk
+                            </p>
+                            <p class="text-[10px] sm:text-[11px] text-craft-brown-light font-bold leading-tight mt-0.5">
+                                Kebutuhan Harian</p>
+                        </div>
+                        <div
+                            class="bg-white/85 p-2 sm:p-2.5 rounded-xl border border-craft-brown-soft text-center min-w-0">
+                            <p class="font-display font-bold text-base sm:text-xl text-craft-brown truncate">Random</p>
+                            <p class="text-[10px] sm:text-[11px] text-craft-brown-light font-bold leading-tight mt-0.5">
+                                Motif Kain Perca</p>
+                        </div>
+                        <div
+                            class="bg-white/85 p-2 sm:p-2.5 rounded-xl border border-craft-brown-soft text-center min-w-0">
+                            <p class="font-display font-bold text-base sm:text-xl text-craft-brown truncate">Eco Craft
+                            </p>
+                            <p class="text-[10px] sm:text-[11px] text-craft-brown-light font-bold leading-tight mt-0.5">
+                                Kurangi Limbah</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kolom Visual Ilustrasi Quilt / Patchwork -->
+                <div class="lg:col-span-6 w-full min-w-0">
+                    <div class="relative max-w-md sm:max-w-lg mx-auto animate-float pb-4 sm:pb-2">
+                        <div
+                            class="p-3 sm:p-6 bg-white rounded-[1.75rem] sm:rounded-[2rem] border-2 border-craft-brown shadow-xl stitch-box">
+                            <div class="grid grid-cols-3 grid-rows-3 gap-2 sm:gap-4 aspect-square">
+                                <div
+                                    class="rounded-xl sm:rounded-2xl bg-craft-pink fabric-texture border border-craft-brown/30 stitch-box flex flex-col items-center justify-center p-1.5 sm:p-2 min-w-0">
+                                    <svg class="w-9 h-9 sm:w-12 sm:h-12" viewBox="0 0 60 60" fill="none">
+                                        <rect x="14" y="16" width="32" height="32" rx="8" fill="#FFFDF9"
+                                            stroke="#5C3A21" stroke-width="2.5" />
+                                        <path d="M14 28L30 35L46 28" fill="#FFF0B3" stroke="#5C3A21" stroke-width="2.2"
+                                            stroke-linejoin="round" />
+                                        <circle cx="30" cy="36" r="3.5" fill="#9AD0FF" stroke="#5C3A21"
+                                            stroke-width="1.8" />
+                                    </svg>
+                                    <span
+                                        class="text-[9px] sm:text-[10px] font-extrabold text-craft-brown mt-0.5 sm:mt-1 truncate max-w-full">Case
+                                        TWS</span>
+                                </div>
+
+                                <div
+                                    class="rounded-xl sm:rounded-2xl bg-craft-yellow fabric-texture border border-craft-brown/30 stitch-box flex flex-col items-center justify-center gap-1 sm:gap-1.5 p-1.5 sm:p-2 min-w-0">
+                                    <div
+                                        class="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-craft-blue-dark border-2 border-craft-brown flex items-center justify-center">
+                                        <div class="grid grid-cols-2 gap-1">
+                                            <span class="w-1 h-1 rounded-full bg-craft-brown"></span>
+                                            <span class="w-1 h-1 rounded-full bg-craft-brown"></span>
+                                            <span class="w-1 h-1 rounded-full bg-craft-brown"></span>
+                                            <span class="w-1 h-1 rounded-full bg-craft-brown"></span>
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="text-[9px] sm:text-[10px] font-extrabold tracking-wider uppercase text-craft-brown truncate max-w-full">Perca</span>
+                                </div>
+
+                                <div
+                                    class="rounded-xl sm:rounded-2xl bg-craft-blue fabric-texture border border-craft-brown/30 stitch-box flex flex-col items-center justify-center p-1.5 sm:p-2 min-w-0">
+                                    <svg class="w-9 h-9 sm:w-12 sm:h-12" viewBox="0 0 60 60" fill="none">
+                                        <circle cx="30" cy="30" r="16" fill="#FFD6E5" stroke="#5C3A21"
+                                            stroke-width="2.5" stroke-dasharray="4 2" />
+                                        <circle cx="30" cy="30" r="6" fill="#FFFDF9" stroke="#5C3A21"
+                                            stroke-width="2" />
+                                    </svg>
+                                    <span
+                                        class="text-[9px] sm:text-[10px] font-extrabold text-craft-brown mt-0.5 sm:mt-1 truncate max-w-full">Scrunchie</span>
+                                </div>
+
+                                <div
+                                    class="rounded-xl sm:rounded-2xl bg-craft-brown-soft/65 fabric-texture border border-craft-brown/30 stitch-box flex flex-col items-center justify-center p-1.5 sm:p-2 min-w-0">
+                                    <svg class="w-9 h-9 sm:w-12 sm:h-12" viewBox="0 0 60 60" fill="none">
+                                        <circle cx="30" cy="18" r="6" fill="#FFD6E5" stroke="#5C3A21"
+                                            stroke-width="2" />
+                                        <circle cx="30" cy="42" r="6" fill="#FFD6E5" stroke="#5C3A21"
+                                            stroke-width="2" />
+                                        <circle cx="18" cy="30" r="6" fill="#FFD6E5" stroke="#5C3A21"
+                                            stroke-width="2" />
+                                        <circle cx="42" cy="30" r="6" fill="#FFD6E5" stroke="#5C3A21"
+                                            stroke-width="2" />
+                                        <circle cx="30" cy="30" r="6" fill="#FFE066" stroke="#5C3A21"
+                                            stroke-width="2" />
+                                    </svg>
+                                    <span
+                                        class="text-[9px] sm:text-[10px] font-extrabold text-craft-brown mt-0.5 truncate max-w-full">Keychain</span>
+                                </div>
+
+                                <div
+                                    class="rounded-xl sm:rounded-2xl bg-cream border-2 border-dashed border-craft-brown flex flex-col items-center justify-center p-1.5 sm:p-2 text-center shadow-inner min-w-0">
+                                    <img src="jahitin.png" alt="">
+                                    <!-- <span
+                                        class="font-display font-bold text-xs sm:text-base text-craft-brown leading-tight truncate max-w-full">Jahit.in</span> -->
+                                    <span
+                                        class="text-[8px] sm:text-[10px] font-bold text-craft-brown-light mt-0.5 truncate max-w-full">Handmade</span>
+                                </div>
+
+                                <div
+                                    class="rounded-xl sm:rounded-2xl bg-craft-pink-dark/50 fabric-texture border border-craft-brown/30 stitch-box flex flex-col items-center justify-center p-1.5 sm:p-2 min-w-0">
+                                    <svg class="w-9 h-9 sm:w-12 sm:h-12" viewBox="0 0 60 60" fill="none">
+                                        <rect x="17" y="14" width="26" height="34" rx="5" fill="#CBE8FF"
+                                            stroke="#5C3A21" stroke-width="2.2" />
+                                        <rect x="21" y="19" width="18" height="22" rx="3" fill="#FFFDF9"
+                                            stroke="#5C3A21" stroke-width="1.6" />
+                                        <circle cx="30" cy="27" r="3.5" fill="#F9B8D0" />
+                                    </svg>
+                                    <span
+                                        class="text-[9px] sm:text-[10px] font-extrabold text-craft-brown mt-0.5 truncate max-w-full">Cardholder</span>
+                                </div>
+
+                                <div
+                                    class="rounded-xl sm:rounded-2xl bg-craft-blue-dark/45 fabric-texture border border-craft-brown/30 stitch-box flex flex-col items-center justify-center p-1.5 sm:p-2 min-w-0">
+                                    <svg class="w-9 h-9 sm:w-12 sm:h-12" viewBox="0 0 60 60" fill="none">
+                                        <rect x="14" y="22" width="32" height="16" rx="8" fill="#FFF0B3"
+                                            stroke="#5C3A21" stroke-width="2.2" />
+                                        <circle cx="22" cy="30" r="3" fill="#5C3A21" />
+                                        <circle cx="38" cy="30" r="3" fill="#F9B8D0" stroke="#5C3A21"
+                                            stroke-width="1.5" />
+                                    </svg>
+                                    <span
+                                        class="text-[9px] sm:text-[10px] font-extrabold text-craft-brown mt-0.5 truncate max-w-full">Klip
+                                        Kabel</span>
+                                </div>
+
+                                <div
+                                    class="rounded-xl sm:rounded-2xl bg-craft-pink/70 fabric-texture border border-craft-brown/30 stitch-box flex items-center justify-center p-2 sm:p-3 min-w-0">
+                                    <div class="grid grid-cols-3 gap-1.5 sm:gap-2.5">
+                                        <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-craft-brown/75"></span>
+                                        <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-cream"></span>
+                                        <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-craft-brown/75"></span>
+                                        <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-cream"></span>
+                                        <span
+                                            class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-craft-yellow-dark"></span>
+                                        <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-cream"></span>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="rounded-xl sm:rounded-2xl bg-craft-yellow-dark/60 fabric-texture border border-craft-brown/30 stitch-box flex flex-col items-center justify-center p-1.5 sm:p-2 min-w-0">
+                                    <svg class="w-9 h-9 sm:w-12 sm:h-12" viewBox="0 0 60 60" fill="none">
+                                        <rect x="13" y="20" width="34" height="24" rx="6" fill="#FFD6E5"
+                                            stroke="#5C3A21" stroke-width="2.2" />
+                                        <line x1="13" y1="27" x2="47" y2="27" stroke="#5C3A21" stroke-width="2" />
+                                        <line x1="30" y1="27" x2="30" y2="44" stroke="#5C3A21" stroke-width="1.8"
+                                            stroke-dasharray="2 2" />
+                                    </svg>
+                                    <span
+                                        class="text-[9px] sm:text-[10px] font-extrabold text-craft-brown mt-0.5 truncate max-w-full">Coin
+                                        Purse</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="mt-3 sm:mt-0 sm:absolute sm:-bottom-4 sm:-left-3 md:-left-5 bg-craft-yellow px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl border-2 border-craft-brown fabric-tag flex items-center gap-2.5 sm:-rotate-2 w-fit mx-auto sm:mx-0">
+                            <span class="text-lg sm:text-xl shrink-0">♻️</span>
+                            <div class="min-w-0">
+                                <p class="font-display font-bold text-xs sm:text-sm text-craft-brown">Peduli Lingkungan
+                                </p>
+                                <p class="text-[10px] sm:text-[11px] font-bold text-craft-brown-light">Kain bekas jadi
+                                    bernilai guna</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         3. ABOUT US (SINGKAT & PADAT)
+    =========================================== -->
+    <section id="tentang-kami"
+        class="py-12 sm:py-16 bg-white/80 border-y-2 border-dashed border-craft-brown-soft w-full">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 reveal text-center space-y-4 sm:space-y-5">
+            <span
+                class="inline-block px-4 py-1.5 rounded-full bg-craft-pink/70 border border-craft-brown/30 text-xs font-extrabold uppercase tracking-wider text-craft-brown">
+                About Us
+            </span>
+
+            <h2 class="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-craft-brown">
+                Tentang Jahit.in
+            </h2>
+
+            <p
+                class="text-sm sm:text-base lg:text-lg text-craft-brown-light font-medium leading-relaxed max-w-3xl mx-auto">
+                <strong class="text-craft-brown font-extrabold">Jahit.in</strong> adalah usaha kerajinan tangan yang
+                memanfaatkan kain bekas menjadi aksesori fungsional dan estetik untuk <strong
+                    class="text-craft-brown font-bold">pelajar dan mahasiswa</strong>. Selain menghadirkan produk
+                kreatif untuk kebutuhan sehari-hari, Jahit.in hadir untuk mengurangi limbah kain serta mengajak lebih
+                peduli pada lingkungan melalui pemanfaatan kembali bahan bekas.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 pt-2 text-left">
+                <div class="p-4 rounded-2xl bg-craft-blue/40 border border-craft-brown/30">
+                    <p class="font-display font-bold text-sm sm:text-base text-craft-brown">🌱 Kurangi Limbah Kain</p>
+                    <p class="text-xs text-craft-brown-light font-semibold mt-1 leading-relaxed">Mengolah sisa kain agar
+                        tetap berguna dan bernilai.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-craft-pink/40 border border-craft-brown/30">
+                    <p class="font-display font-bold text-sm sm:text-base text-craft-brown">🎒 Pas untuk Pelajar &
+                        Kuliah</p>
+                    <p class="text-xs text-craft-brown-light font-semibold mt-1 leading-relaxed">Praktis, lucu, dan
+                        terjangkau untuk aktivitas harian.</p>
+                </div>
+                <div
+                    class="p-4 rounded-2xl bg-craft-yellow/65 border border-craft-brown/30 sm:col-span-2 lg:col-span-1">
+                    <p class="font-display font-bold text-sm sm:text-base text-craft-brown">🎲 Unik & Tidak Pasaran</p>
+                    <p class="text-xs text-craft-brown-light font-semibold mt-1 leading-relaxed">Motif kain perca
+                        bersifat acak sehingga tiap item unik.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         4. KATALOG & HARGA (6 PRODUK + FRAME GAMBAR)
+    =========================================== -->
+    <section id="katalog" class="py-14 sm:py-20 w-full">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+
+            <!-- Header Katalog -->
+            <div class="text-center max-w-2xl mx-auto space-y-2.5 sm:space-y-3 mb-6 sm:mb-8">
+                <span
+                    class="inline-block px-4 py-1.5 rounded-full bg-craft-yellow border-2 border-dashed border-craft-brown text-xs font-extrabold uppercase tracking-wider text-craft-brown">
+                    Katalog & Harga
+                </span>
+                <h2 class="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-craft-brown">
+                    Pilihan Produk Jahit.in
+                </h2>
+                <p class="text-craft-brown-light font-medium text-xs sm:text-sm lg:text-base leading-relaxed">
+                    Catatan: Motif dan detail kain perca bersifat <strong>random</strong> serta modelnya bisa berbeda
+                    mengikuti ketersediaan sisa kain.
+                </p>
+            </div>
+
+            <!-- Bar Pencarian & Filter Kategori -->
+            <div
+                class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3.5 sm:gap-4 mb-8 sm:mb-10 bg-white/85 p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl border-2 border-dashed border-craft-brown-soft">
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-2" id="category-filters">
+                    <button type="button" data-filter="semua"
+                        class="filter-btn active min-h-[44px] px-3.5 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-craft-brown text-cream border-2 border-craft-brown">
+                        Semua (6)
+                    </button>
+                    <button type="button" data-filter="gadget"
+                        class="filter-btn min-h-[44px] px-3.5 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-craft-blue/45 text-craft-brown hover:bg-craft-blue border-2 border-dashed border-craft-brown/50">
+                        Gadget
+                    </button>
+                    <button type="button" data-filter="pouch"
+                        class="filter-btn min-h-[44px] px-3.5 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-craft-brown-soft/50 text-craft-brown hover:bg-craft-brown-soft border-2 border-dashed border-craft-brown/50">
+                        Dompet & Holder
+                    </button>
+                    <button type="button" data-filter="aksesori"
+                        class="filter-btn min-h-[44px] px-3.5 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-craft-pink/45 text-craft-brown hover:bg-craft-pink border-2 border-dashed border-craft-brown/50">
+                        Aksesori & Gantungan
+                    </button>
+                </div>
+
+                <div class="relative w-full md:w-64 shrink-0">
+                    <input type="text" id="search-input" placeholder="Cari produk..."
+                        class="w-full min-h-[44px] pl-10 pr-4 py-2.5 rounded-full bg-cream border-2 border-craft-brown-soft focus:border-craft-brown focus:outline-none text-xs sm:text-sm font-semibold text-craft-brown">
+                    <svg class="w-4 h-4 text-craft-brown-light absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Grid Produk: 1 kolom di HP kecil, 2 kolom di tablet/HP besar, 3 kolom di desktop -->
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-7">
+                <!-- Kartu produk dimuat lewat JavaScript -->
+            </div>
+
+            <!-- State Kosong -->
+            <div id="empty-state"
+                class="hidden text-center py-12 px-4 bg-white/70 rounded-3xl border-2 border-dashed border-craft-brown-soft mt-6">
+                <p class="text-3xl mb-2">🧵</p>
+                <p class="font-display font-bold text-lg text-craft-brown">Produk tidak ditemukan</p>
+                <p class="text-sm text-craft-brown-light">Coba kata kunci lain atau pilih "Semua (6)".</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
+         5. KONTAK & FORM PEMESANAN
+    =========================================== -->
+    <section id="kontak"
+        class="py-14 sm:py-20 bg-craft-pink/25 border-t-2 border-dashed border-craft-brown-soft w-full">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+
+            <div class="text-center max-w-2xl mx-auto space-y-2.5 sm:space-y-3 mb-8 sm:mb-12">
+                <span
+                    class="inline-block px-4 py-1.5 rounded-full bg-craft-blue border border-craft-brown/30 text-xs font-extrabold uppercase tracking-wider text-craft-brown">
+                    Kontak & Pemesanan
+                </span>
+                <h2 class="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-craft-brown">
+                    Pesan & Hubungi Jahit.in
+                </h2>
+                <p class="text-craft-brown-light font-medium text-xs sm:text-sm lg:text-base">
+                    Hubungi kami melalui WhatsApp untuk pemesanan atau pantau update motif perca di Instagram.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+
+                <!-- Kontak: Hanya WhatsApp (Pemesanan) & Instagram -->
+                <div
+                    class="lg:col-span-5 bg-cream p-5 sm:p-7 lg:p-8 rounded-[1.75rem] sm:rounded-[2rem] border-2 border-craft-brown shadow-md stitch-box space-y-4 sm:space-y-5 min-w-0">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-craft-brown-light">Kanal
+                            Resmi</span>
+                        <h3 class="font-display font-bold text-xl sm:text-2xl text-craft-brown mt-0.5">Kontak Jahit.in
+                        </h3>
+                        <p class="text-xs font-semibold text-craft-brown-light mt-1">Pemesanan langsung dilayani via
+                            WhatsApp.</p>
+                    </div>
+
+                    <div class="space-y-3 sm:space-y-4">
+                        <!-- WhatsApp 1 (Pemesanan) -->
+                        <div
+                            class="flex items-center gap-3 p-3.5 sm:p-4 rounded-2xl bg-craft-yellow/65 hover:bg-craft-yellow border-2 border-craft-brown/40 transition-all group min-w-0">
+                            <a href="https://wa.me/6281513317460?text=Halo%20Jahit.in!%20Saya%20ingin%20melakukan%20pemesanan%20produk%20kain%20perca."
+                                target="_blank" rel="noopener noreferrer"
+                                class="flex items-center gap-3 flex-1 min-w-0">
+                                <div
+                                    class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-craft-brown text-cream flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z" />
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-[11px] sm:text-xs font-extrabold text-craft-brown-light truncate">
+                                        WhatsApp 1 (Pemesanan)</p>
+                                    <p class="font-display font-bold text-sm sm:text-base text-craft-brown truncate">+62
+                                        815-1331-7460</p>
+                                </div>
+                            </a>
+                            <button type="button" onclick="copyPhone(event, '6281513317460')" title="Salin Nomor"
+                                class="min-h-[44px] px-3 py-1.5 rounded-xl bg-cream border border-craft-brown/40 text-xs font-extrabold text-craft-brown hover:bg-craft-pink/60 shrink-0">
+                                Salin
+                            </button>
+                        </div>
+
+                        <!-- WhatsApp 2 (Pemesanan) -->
+                        <div
+                            class="flex items-center gap-3 p-3.5 sm:p-4 rounded-2xl bg-craft-blue/45 hover:bg-craft-blue/70 border-2 border-craft-brown/40 transition-all group min-w-0">
+                            <a href="https://wa.me/62895321211457?text=Halo%20Jahit.in!%20Saya%20ingin%20melakukan%20pemesanan%20produk%20kain%20perca."
+                                target="_blank" rel="noopener noreferrer"
+                                class="flex items-center gap-3 flex-1 min-w-0">
+                                <div
+                                    class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-craft-brown text-cream flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z" />
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-[11px] sm:text-xs font-extrabold text-craft-brown-light truncate">
+                                        WhatsApp 2 (Pemesanan)</p>
+                                    <p class="font-display font-bold text-sm sm:text-base text-craft-brown truncate">+62
+                                        895-3212-11457</p>
+                                </div>
+                            </a>
+                            <button type="button" onclick="copyPhone(event, '62895321211457')" title="Salin Nomor"
+                                class="min-h-[44px] px-3 py-1.5 rounded-xl bg-cream border border-craft-brown/40 text-xs font-extrabold text-craft-brown hover:bg-craft-pink/60 shrink-0">
+                                Salin
+                            </button>
+                        </div>
+
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/jahit.in.yubci" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-3 p-3.5 sm:p-4 rounded-2xl bg-craft-pink/45 hover:bg-craft-pink/70 border-2 border-craft-brown/30 transition-all group min-w-0">
+                            <div
+                                class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-craft-pink-dark text-craft-brown flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" />
+                                    <circle cx="12" cy="12" r="4" />
+                                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-[11px] sm:text-xs font-extrabold text-craft-brown-light truncate">
+                                    Instagram</p>
+                                <p class="font-display font-bold text-sm sm:text-base text-craft-brown truncate">
+                                    @jahit.in.yubci</p>
+                            </div>
+                            <svg class="w-4 h-4 text-craft-brown shrink-0" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"
+                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Form Pemesanan: Hanya Jenis Barang (Tanpa Pilihan Variasi/Warna/Model) -->
+                <div
+                    class="lg:col-span-7 bg-cream p-5 sm:p-7 lg:p-8 rounded-[1.75rem] sm:rounded-[2rem] border-2 border-craft-brown shadow-md stitch-box min-w-0">
+                    <h3 class="font-display font-bold text-xl sm:text-2xl text-craft-brown mb-1.5">Form Pemesanan</h3>
+                    <p class="text-xs sm:text-sm font-medium text-craft-brown-light mb-4 leading-relaxed">
+                        Pilih jenis barang yang ingin dipesan. Karena memanfaatkan kain perca, motif dan model bersifat
+                        <strong>random (tidak konsisten)</strong> sehingga tidak tersedia pilihan variasi.
+                    </p>
+
+                    <div
+                        class="mb-4 sm:mb-5 p-3 sm:p-3.5 rounded-xl bg-craft-yellow/65 border border-dashed border-craft-brown text-xs font-bold text-craft-brown flex items-start sm:items-center gap-2.5">
+                        <span class="text-base shrink-0">🎲</span>
+                        <span>Info Perca: Kain perca dikirim acak (random) sesuai ketersediaan motif & model saat
+                            pembuatan.</span>
+                    </div>
+
+                    <form id="order-form" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4">
+                            <div class="sm:col-span-2 min-w-0">
+                                <label for="cust-product"
+                                    class="block text-xs font-extrabold text-craft-brown mb-1.5">Jenis Barang *</label>
+                                <select id="cust-product"
+                                    class="w-full min-h-[44px] px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-white border-2 border-craft-brown-soft focus:border-craft-brown focus:outline-none text-xs sm:text-sm font-semibold text-craft-brown">
+                                    <option value="Case TWS" data-price="9999">Case TWS — Rp 9.999</option>
+                                    <option value="Coin Purse" data-price="9999">Coin Purse — Rp 9.999</option>
+                                    <option value="Cardholder / Pictholder" data-price="9999">Cardholder / Pictholder —
+                                        Rp 9.999</option>
+                                    <option value="Keychain" data-price="6999">Keychain — Rp 6.999</option>
+                                    <option value="Klip Headset" data-price="6999">Klip Headset — Rp 6.999</option>
+                                    <option value="Scrunchie" data-price="4999">Scrunchie — Rp 4.999</option>
+                                </select>
+                            </div>
+
+                            <div class="min-w-0">
+                                <label for="cust-qty"
+                                    class="block text-xs font-extrabold text-craft-brown mb-1.5">Jumlah *</label>
+                                <input type="number" id="cust-qty" min="1" value="1" required
+                                    class="w-full min-h-[44px] px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-white border-2 border-craft-brown-soft focus:border-craft-brown focus:outline-none text-xs sm:text-sm font-semibold text-craft-brown">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+                            <div class="min-w-0">
+                                <label for="cust-name" class="block text-xs font-extrabold text-craft-brown mb-1.5">Nama
+                                    Pemesan *</label>
+                                <input type="text" id="cust-name" required placeholder="Masukkan nama kamu"
+                                    class="w-full min-h-[44px] px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-white border-2 border-craft-brown-soft focus:border-craft-brown focus:outline-none text-xs sm:text-sm font-semibold text-craft-brown">
+                            </div>
+
+                            <div class="min-w-0">
+                                <label for="cust-wa-target"
+                                    class="block text-xs font-extrabold text-craft-brown mb-1.5">Kirim Pesanan ke
+                                    WhatsApp *</label>
+                                <select id="cust-wa-target"
+                                    class="w-full min-h-[44px] px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-white border-2 border-craft-brown-soft focus:border-craft-brown focus:outline-none text-xs sm:text-sm font-semibold text-craft-brown">
+                                    <option value="6281513317460">WA 1: +62 815-1331-7460</option>
+                                    <option value="62895321211457">WA 2: +62 895-3212-11457</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="cust-note" class="block text-xs font-extrabold text-craft-brown mb-1.5">Catatan
+                                Tambahan (Opsional)</label>
+                            <input type="text" id="cust-note"
+                                placeholder="Contoh: COD area kampus / saat entrepeneurfair 2026.."
+                                class="w-full min-h-[44px] px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-white border-2 border-craft-brown-soft focus:border-craft-brown focus:outline-none text-xs sm:text-sm font-semibold text-craft-brown">
+                        </div>
+
+                        <!-- Ringkasan Estimasi Harga -->
+                        <div
+                            class="p-3.5 sm:p-4 rounded-2xl bg-craft-blue/35 border border-craft-brown/30 flex flex-col xs:flex-row sm:flex-row items-start sm:items-center justify-between gap-2">
+                            <div class="min-w-0">
+                                <p class="text-xs font-bold text-craft-brown-light">Estimasi Total Harga</p>
+                                <p id="order-breakdown" class="text-xs font-semibold text-craft-brown truncate">1x Case
+                                    TWS (Motif Random)</p>
+                            </div>
+                            <p id="order-total"
+                                class="font-display font-bold text-lg sm:text-xl text-craft-brown shrink-0">Rp 9.999</p>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full min-h-[48px] py-3.5 sm:py-4 px-5 sm:px-6 rounded-2xl bg-craft-brown hover:bg-craft-brown-light text-cream font-display font-semibold text-sm sm:text-base shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                            <span>Pesan via WhatsApp</span>
+                            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         6. FOOTER DENGAN PITA POLA PERCA
+    =========================================== -->
+    <footer class="bg-craft-brown text-cream pt-10 sm:pt-12 pb-8 relative w-full">
+        <div class="absolute top-0 left-0 right-0 h-3 flex">
+            <div class="flex-1 bg-craft-pink"></div>
+            <div class="flex-1 bg-craft-yellow-dark"></div>
+            <div class="flex-1 bg-craft-blue-dark"></div>
+            <div class="flex-1 bg-craft-pink-dark"></div>
+            <div class="flex-1 bg-craft-yellow"></div>
+            <div class="flex-1 bg-craft-blue"></div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="flex flex-col md:flex-row justify-between items-center gap-5 sm:gap-6 pb-7 sm:pb-8 border-b border-dashed border-cream/30">
+                <div class="text-center md:text-left">
+                    <span class="font-display font-bold text-2xl tracking-tight text-cream">
+                        Jahit<span class="text-craft-pink">.in</span>
+                    </span>
+                    <p class="text-xs text-cream/85 mt-1 font-medium">
+                        Handmade Perca Craft untuk pelajar & mahasiswa.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm font-bold text-cream/90">
+                    <a href="#beranda" class="py-1 hover:text-craft-yellow transition-colors">Beranda</a>
+                    <a href="#tentang-kami" class="py-1 hover:text-craft-pink transition-colors">About Us</a>
+                    <a href="#katalog" class="py-1 hover:text-craft-blue transition-colors">Katalog & Harga</a>
+                    <a href="#kontak" class="py-1 hover:text-craft-yellow transition-colors">Kontak</a>
+                </div>
+            </div>
+
+            <div
+                class="pt-5 sm:pt-6 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-3 text-xs text-cream/75 font-medium text-center sm:text-left">
+                <p>&copy; 2026 Jahit.in Craft. Dibuat dengan 🪡 dan kepedulian lingkungan.</p>
+                <p>WhatsApp & Instagram: @jahit.in.yubci</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         MODAL DETAIL PRODUK (INTERAKTIF)
+    =========================================== -->
+    <div id="product-modal"
+        class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4 bg-craft-brown/60 backdrop-blur-sm overflow-y-auto">
+        <div
+            class="bg-cream w-full max-w-lg rounded-[1.75rem] sm:rounded-[2rem] border-2 border-craft-brown shadow-2xl overflow-hidden my-auto max-h-[90vh] flex flex-col">
+            <div class="p-5 sm:p-7 space-y-4 sm:space-y-5 overflow-y-auto">
+                <div class="flex justify-between items-start gap-3">
+                    <div class="min-w-0">
+                        <span id="modal-category"
+                            class="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-craft-pink text-craft-brown border border-craft-brown/30 mb-1.5">Kategori</span>
+                        <h3 id="modal-title"
+                            class="font-display font-bold text-xl sm:text-2xl text-craft-brown break-words">Nama Produk
+                        </h3>
+                    </div>
+                    <button id="close-modal" type="button" aria-label="Tutup Detail"
+                        class="min-w-[44px] min-h-[44px] p-2 rounded-xl bg-craft-brown-soft/50 hover:bg-craft-pink text-craft-brown transition-colors flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Frame Gambar di Modal -->
+                <div class="p-2.5 sm:p-3 bg-white rounded-2xl border-2 border-craft-brown shadow-sm">
+                    <div id="modal-visual"
+                        class="h-36 sm:h-44 rounded-xl border-2 border-dashed border-craft-brown/40 flex items-center justify-center p-3 sm:p-4">
+                        <!-- Konten Frame -->
+                    </div>
+                </div>
+
+                <div class="space-y-2.5">
+                    <div class="flex justify-between items-center gap-2">
+                        <span
+                            class="text-xs font-extrabold uppercase tracking-wider text-craft-brown-light">Harga</span>
+                        <span id="modal-price" class="font-display font-bold text-lg sm:text-xl text-craft-brown">Rp
+                            0</span>
+                    </div>
+                    <p id="modal-desc" class="text-xs sm:text-sm font-medium text-craft-brown leading-relaxed"></p>
+                    <p
+                        class="text-xs font-semibold text-craft-brown-light bg-white p-3 rounded-xl border border-craft-brown-soft leading-relaxed">
+                        Motif & model kain perca bersifat <strong>random</strong> karena memanfaatkan sisa kain yang
+                        tidak konsisten.
+                    </p>
+                </div>
+
+                <div class="pt-1 flex flex-col sm:flex-row gap-2.5 sm:gap-3">
+                    <a id="modal-wa-btn" href="#" target="_blank" rel="noopener noreferrer"
+                        class="flex-1 min-h-[44px] py-3 px-5 rounded-xl bg-craft-brown hover:bg-craft-brown-light text-cream font-display font-semibold text-xs sm:text-sm text-center shadow-md transition-all flex items-center justify-center">
+                        Pesan via WhatsApp
+                    </a>
+                    <button type="button" id="modal-select-form"
+                        class="min-h-[44px] py-3 px-4 rounded-xl bg-craft-yellow hover:bg-craft-yellow-dark text-craft-brown border-2 border-craft-brown font-display font-semibold text-xs sm:text-sm transition-all flex items-center justify-center">
+                        Pilih di Form
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifikasi Toast -->
+    <div id="toast-box"
+        class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-5 sm:bottom-5 z-50 hidden transform transition-all duration-300 translate-y-4 opacity-0 sm:max-w-sm">
+        <div
+            class="bg-craft-brown text-cream px-4 sm:px-5 py-3.5 rounded-2xl shadow-xl border-2 border-craft-yellow flex items-center gap-3 text-xs sm:text-sm font-bold">
+            <span class="shrink-0">🪡</span>
+            <span id="toast-msg" class="break-words">Berhasil!</span>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         JAVASCRIPT INTERAKTIF
+    =========================================== -->
+    <script>
+        const WHATSAPP_NUMBERS = [
+            {id: "wa1", label: "WA 1", display: "+62 815-1331-7460", number: "6281513317460"},
+            {id: "wa2", label: "WA 2", display: "+62 895-3212-11457", number: "62895321211457"}
+        ];
+        const ADMIN_WA = WHATSAPP_NUMBERS[0].number;
+
+        /**
+         * Konfigurasi foto produk katalog langsung di dalam script.
+         * Isi value dengan URL gambar eksternal (https://...) atau data URI (data:image/...).
+         * Jika dikosongkan (""), frame akan otomatis menampilkan ilustrasi SVG bawaan.
+         */
+        const CATALOG_PHOTO_MAP = {
+            1: "3.png", // Case TWS (Rp 9.999)
+            2: "6p.png", // Coin Purse (Rp 9.999)
+            3: "cardhldr.jpeg", // Cardholder / Pictholder (Rp 9.999)
+            4: "5.png", // Keychain (Rp 6.999)
+            5: "4p.png", // Klip Headset (Rp 6.999)
+            6: "1.png"  // Scrunchie (Rp 4.999)
+        };
+
+        function formatRupiah(num) {
+            return "Rp " + Number(num).toLocaleString("id-ID");
+        }
+
+        // 6 Produk Katalog & Harga Persis Sesuai Permintaan
+        const products = [
+            {
+                id: 1,
+                name: "Case TWS",
+                category: "gadget",
+                categoryLabel: "Gadget",
+                priceNum: 9999,
+                priceText: "Rp 9.999",
+                cardBg: "bg-craft-pink/40",
+                badgeBg: "bg-craft-pink",
+                description: "Wadah penyimpanan TWS yang terbuat dari kain bekas dan dilengkapi kancing. Bentuknya praktis untuk dibawa serta membantu melindungi wadah TWS dari goresan ringan.",
+                svg: `
+                    <svg class="w-28 h-28" viewBox="0 0 120 120" fill="none">
+                        <circle cx="60" cy="20" r="7" stroke="#5C3D2E" stroke-width="2.5"/>
+                        <line x1="60" y1="27" x2="60" y2="34" stroke="#5C3D2E" stroke-width="2.5"/>
+                        <rect x="30" y="34" width="60" height="62" rx="14" fill="#FFFDF9" stroke="#5C3D2E" stroke-width="3"/>
+                        <path d="M32 62H88V82C88 89 83 94 76 94H44C37 94 32 89 32 82V62Z" fill="#BCE0FD"/>
+                        <line x1="60" y1="62" x2="60" y2="94" stroke="#5C3D2E" stroke-width="2" stroke-dasharray="3 3"/>
+                        <path d="M30 44C30 38 35 34 41 34H79C85 34 90 38 90 44L60 66L30 44Z" fill="#FDE68A" stroke="#5C3D2E" stroke-width="2.5" stroke-linejoin="round"/>
+                        <circle cx="60" cy="64" r="6" fill="#F4A7B9" stroke="#5C3D2E" stroke-width="2"/>
+                        <circle cx="58.5" cy="62.5" r="1" fill="#5C3D2E"/>
+                        <circle cx="61.5" cy="65.5" r="1" fill="#5C3D2E"/>
+                    </svg>
+                `
+            },
+            {
+                id: 2,
+                name: "Coin Purse",
+                category: "pouch",
+                categoryLabel: "Dompet & Holder",
+                priceNum: 9999,
+                priceText: "Rp 9.999",
+                cardBg: "bg-craft-blue/40",
+                badgeBg: "bg-craft-blue",
+                description: "Tas kecil yang dibuat dari gabungan kain bekas dengan motif beragam. Produk ini cocok untuk menyimpan alat tulis, kosmetik, dan barang-barang kecil lainnya.",
+                svg: `
+                    <svg class="w-28 h-28" viewBox="0 0 120 120" fill="none">
+                        <rect x="20" y="34" width="80" height="54" rx="12" fill="#FFFDF9" stroke="#5C3D2E" stroke-width="3"/>
+                        <line x1="20" y1="48" x2="100" y2="48" stroke="#5C3D2E" stroke-width="2.8"/>
+                        <rect x="86" y="44" width="10" height="8" rx="2" fill="#FACC15" stroke="#5C3D2E" stroke-width="1.8"/>
+                        <path d="M22 50H59V86H32C26.5 86 22 81.5 22 76V50Z" fill="#F9C8D9"/>
+                        <path d="M61 50H98V67H61V50Z" fill="#FDE68A"/>
+                        <path d="M61 69H98V76C98 81.5 93.5 86 88 86H61V69Z" fill="#BCE0FD"/>
+                        <line x1="60" y1="49" x2="60" y2="87" stroke="#5C3D2E" stroke-width="2" stroke-dasharray="3 2"/>
+                        <line x1="60" y1="68" x2="99" y2="68" stroke="#5C3D2E" stroke-width="2" stroke-dasharray="3 2"/>
+                    </svg>
+                `
+            },
+            {
+                id: 3,
+                name: "Cardholder / Pictholder",
+                category: "pouch",
+                categoryLabel: "Dompet & Holder",
+                priceNum: 9999,
+                priceText: "Rp 9.999",
+                cardBg: "bg-craft-pink/40",
+                badgeBg: "bg-craft-pink",
+                description: "Tempat penyimpanan kartu foto yang dibuat dari kain bekas dengan desain lucu dan menarik. Produk ini dapat digunakan untuk menyimpan photocard sekaligus menjadi aksesori gantungan tas.",
+                svg: `
+                    <svg class="w-28 h-28" viewBox="0 0 120 120" fill="none">
+                        <circle cx="60" cy="16" r="6" stroke="#5C3D2E" stroke-width="2.5"/>
+                        <path d="M60 22V30" stroke="#5C3D2E" stroke-width="2.5"/>
+                        <rect x="34" y="30" width="52" height="72" rx="10" fill="#BCE0FD" stroke="#5C3D2E" stroke-width="2.8"/>
+                        <rect x="38" y="34" width="44" height="64" rx="7" stroke="#5C3D2E" stroke-width="1.5" stroke-dasharray="3 2"/>
+                        <rect x="43" y="41" width="34" height="46" rx="5" fill="#FFFDF9" stroke="#5C3D2E" stroke-width="2"/>
+                        <circle cx="60" cy="58" r="7" fill="#FDE68A" stroke="#5C3D2E" stroke-width="1.8"/>
+                        <path d="M49 78C49 71 54 67 60 67C66 67 71 71 71 78" fill="#F9C8D9" stroke="#5C3D2E" stroke-width="1.8"/>
+                        <circle cx="43" cy="41" r="4" fill="#F4A7B9" stroke="#5C3D2E" stroke-width="1.5"/>
+                    </svg>
+                `
+            },
+            {
+                id: 4,
+                name: "Keychain",
+                category: "aksesori",
+                categoryLabel: "Aksesori & Gantungan",
+                priceNum: 6999,
+                priceText: "Rp 6.999",
+                cardBg: "bg-craft-yellow/60",
+                badgeBg: "bg-craft-yellow-dark",
+                description: "Dibuat dari kain bekas berbentuk bunga dengan hiasan kancing di bagian tengah. Produk ini cocok digunakan sebagai gantungan kunci maupun hiasan tas.",
+                svg: `
+                    <svg class="w-28 h-28" viewBox="0 0 120 120" fill="none">
+                        <circle cx="60" cy="20" r="8" stroke="#5C3D2E" stroke-width="2.5"/>
+                        <line x1="60" y1="28" x2="60" y2="38" stroke="#5C3D2E" stroke-width="2.5"/>
+                        <circle cx="60" cy="46" r="13" fill="#F9C8D9" stroke="#5C3D2E" stroke-width="2.5"/>
+                        <circle cx="79" cy="60" r="13" fill="#BCE0FD" stroke="#5C3D2E" stroke-width="2.5"/>
+                        <circle cx="72" cy="82" r="13" fill="#F9C8D9" stroke="#5C3D2E" stroke-width="2.5"/>
+                        <circle cx="48" cy="82" r="13" fill="#BCE0FD" stroke="#5C3D2E" stroke-width="2.5"/>
+                        <circle cx="41" cy="60" r="13" fill="#F9C8D9" stroke="#5C3D2E" stroke-width="2.5"/>
+                        <circle cx="60" cy="66" r="11" fill="#FACC15" stroke="#5C3D2E" stroke-width="2.5"/>
+                        <circle cx="57" cy="63" r="1.4" fill="#5C3D2E"/>
+                        <circle cx="63" cy="63" r="1.4" fill="#5C3D2E"/>
+                        <circle cx="57" cy="69" r="1.4" fill="#5C3D2E"/>
+                        <circle cx="63" cy="69" r="1.4" fill="#5C3D2E"/>
+                    </svg>
+                `
+            },
+            {
+                id: 5,
+                name: "Klip Headset",
+                category: "gadget",
+                categoryLabel: "Gadget",
+                priceNum: 6999,
+                priceText: "Rp 6.999",
+                cardBg: "bg-craft-blue/40",
+                badgeBg: "bg-craft-blue",
+                description: "Aksesori penyimpanan kabel headset yang dibuat dari kain bekas. Produk ini membantu merapikan kabel agar tidak mudah kusut dan praktis dibawa saat beraktivitas.",
+                svg: `
+                    <svg class="w-28 h-28" viewBox="0 0 120 120" fill="none">
+                        <path d="M44 26C36 26 32 34 32 60C32 86 36 94 44 94C52 94 56 86 56 60C56 34 52 26 44 26Z" stroke="#8B5E3C" stroke-width="3.5"/>
+                        <path d="M76 26C68 26 64 34 64 60C64 86 68 94 76 94C84 94 88 86 88 60C88 34 84 26 76 26Z" stroke="#8B5E3C" stroke-width="3.5"/>
+                        <circle cx="40" cy="24" r="5" fill="#5C3D2E"/>
+                        <circle cx="80" cy="24" r="5" fill="#5C3D2E"/>
+                        <rect x="24" y="47" width="72" height="26" rx="13" fill="#FDE68A" stroke="#5C3D2E" stroke-width="2.8"/>
+                        <rect x="28" y="51" width="64" height="18" rx="9" stroke="#5C3D2E" stroke-width="1.5" stroke-dasharray="3 2"/>
+                        <circle cx="80" cy="60" r="6" fill="#F9C8D9" stroke="#5C3D2E" stroke-width="2"/>
+                        <circle cx="80" cy="60" r="1.5" fill="#5C3D2E"/>
+                    </svg>
+                `
+            },
+            {
+                id: 6,
+                name: "Scrunchie",
+                category: "aksesori",
+                categoryLabel: "Aksesori & Gantungan",
+                priceNum: 4999,
+                priceText: "Rp 4.999",
+                cardBg: "bg-craft-yellow/60",
+                badgeBg: "bg-craft-yellow-dark",
+                description: "Aksesori rambut yang dibuat dari kain bekas dengan berbagai motif dan warna. Produk ini dapat digunakan untuk mengikat rambut sekaligus mempercantik penampilan sehari-hari.",
+                svg: `
+                    <svg class="w-28 h-28" viewBox="0 0 120 120" fill="none">
+                        <path d="M60 22C70 18 82 22 86 31C96 34 102 45 98 55C103 65 98 78 88 82C85 92 73 98 63 94C53 99 40 94 36 84C26 81 20 69 24 59C19 49 24 36 34 32C37 22 49 17 60 22Z" fill="#F9C8D9" stroke="#5C3D2E" stroke-width="2.8" stroke-linejoin="round"/>
+                        <path d="M60 22V44M86 31L71 48M98 55H76M88 82L71 69M63 94V74M36 84L49 69M24 59H44M34 32L49 48" stroke="#5C3D2E" stroke-width="1.6" stroke-dasharray="3 2"/>
+                        <circle cx="60" cy="59" r="15" fill="#FFFDF9" stroke="#5C3D2E" stroke-width="2.5"/>
+                    </svg>
+                `
+            }
+        ];
+
+        const productGrid = document.getElementById('product-grid');
+        const emptyState = document.getElementById('empty-state');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const searchInput = document.getElementById('search-input');
+
+        let currentFilter = 'semua';
+        let currentSearch = '';
+
+        function getProductFrameContent(item) {
+            const customPhoto = CATALOG_PHOTO_MAP[item.id] && CATALOG_PHOTO_MAP[item.id].trim();
+            if (customPhoto) {
+                return `<img src="${customPhoto}" alt="${item.name}" class="w-full h-full object-cover rounded-xl" onerror="this.onerror=null; this.src='https://placehold.co/400x300/FFD6E5/5C3A21?text=${encodeURIComponent(item.name)}';">`;
+            }
+            return `<div class="group-hover:scale-105 transition-transform duration-300">${item.svg}</div>`;
+        }
+        function getWhatsAppLink(productName, priceText, waNumber) {
+            const targetWa = waNumber || getSelectedWhatsAppNumber();
+            const text = `Halo Jahit.in! Saya mau pesan *${productName}* (${priceText}) dengan motif kain perca random.`;
+            return `https://wa.me/${targetWa}?text=${encodeURIComponent(text)}`;
+        }
+
+        function renderProducts() {
+            productGrid.innerHTML = '';
+            const filtered = products.filter(p => {
+                const matchCategory = currentFilter === 'semua' || p.category === currentFilter;
+                const matchSearch = p.name.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    p.description.toLowerCase().includes(currentSearch.toLowerCase());
+                return matchCategory && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement('article');
+                card.className = "bg-cream rounded-[1.5rem] sm:rounded-[1.75rem] border-2 border-craft-brown/85 p-4 sm:p-5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group min-w-0";
+
+                card.innerHTML = `
+                    <div class="min-w-0">
+                        <!-- Frame Gambar Produk -->
+                        <div class="p-2 sm:p-2.5 bg-white rounded-2xl border-2 border-craft-brown shadow-sm mb-3.5 sm:mb-4">
+                            <div class="${item.cardBg} fabric-texture h-36 sm:h-44 rounded-xl border-2 border-dashed border-craft-brown/40 relative flex items-center justify-center overflow-hidden p-2">
+                                <span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full ${item.badgeBg} border border-craft-brown/40 text-[10px] font-extrabold text-craft-brown z-10 max-w-[65%] truncate">
+                                    ${item.categoryLabel}
+                                </span>
+                                ${getProductFrameContent(item)}
+                            </div>
+                        </div>
+
+                        <!-- Nama & Harga Pas -->
+                        <div class="space-y-2">
+                            <div class="flex flex-wrap justify-between items-start gap-2">
+                                <h3 class="font-display font-bold text-lg sm:text-xl text-craft-brown leading-snug break-words">
+                                    ${item.name}
+                                </h3>
+                                <span class="font-display font-bold text-sm sm:text-base px-2.5 sm:px-3 py-1 rounded-xl bg-craft-yellow border border-craft-brown/40 text-craft-brown shrink-0">
+                                    ${item.priceText}
+                                </span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-craft-brown-light font-medium leading-relaxed">
+                                ${item.description}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Aksi (min 44px touch target) -->
+                    <div class="pt-4 mt-4 border-t border-dashed border-craft-brown-soft flex flex-col xs:flex-row sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2.5">
+                        <button type="button" onclick="selectProductInForm('${item.name}')"
+                           class="flex-1 min-h-[44px] py-2.5 px-4 rounded-xl bg-craft-brown hover:bg-craft-brown-light text-cream font-display font-semibold text-xs sm:text-sm text-center transition-colors shadow-sm flex items-center justify-center">
+                            Pesan Item Ini
+                        </button>
+                        <button type="button" onclick="openProductModal(${item.id})"
+                           class="min-h-[44px] py-2.5 px-4 rounded-xl bg-white hover:bg-craft-yellow/70 text-craft-brown border-2 border-dashed border-craft-brown/60 font-display font-semibold text-xs sm:text-sm transition-colors flex items-center justify-center shrink-0">
+                            Detail
+                        </button>
+                    </div>
+                `;
+                productGrid.appendChild(card);
+            });
+        }
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-craft-brown', 'text-cream', 'border-solid');
+                    b.classList.add('text-craft-brown', 'border-dashed');
+                });
+                btn.classList.remove('border-dashed');
+                btn.classList.add('bg-craft-brown', 'text-cream', 'border-solid');
+                currentFilter = btn.dataset.filter;
+                renderProducts();
+            });
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            renderProducts();
+        });
+
+        // ==========================================
+        // MODAL DETAIL PRODUK
+        // ==========================================
+        const modal = document.getElementById('product-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        let currentModalProduct = null;
+
+        function openProductModal(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            currentModalProduct = product;
+
+            document.getElementById('modal-category').textContent = product.categoryLabel;
+            document.getElementById('modal-title').textContent = product.name;
+            document.getElementById('modal-price').textContent = product.priceText;
+            document.getElementById('modal-desc').textContent = product.description;
+
+            const visualBox = document.getElementById('modal-visual');
+            visualBox.className = `h-44 rounded-xl border-2 border-dashed border-craft-brown/40 flex items-center justify-center p-4 overflow-hidden ${product.cardBg}`;
+            visualBox.innerHTML = getProductFrameContent(product);
+
+            document.getElementById('modal-wa-btn').href = getWhatsAppLink(product.name, product.priceText);
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProductModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        closeModalBtn.addEventListener('click', closeProductModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeProductModal();
+        });
+
+        function selectProductInForm(productName) {
+            const selectEl = document.getElementById('cust-product');
+            selectEl.value = productName;
+            updateOrderTotal();
+            document.getElementById('kontak').scrollIntoView({behavior: 'smooth'});
+        }
+
+        document.getElementById('modal-select-form').addEventListener('click', () => {
+            if (currentModalProduct) {
+                const name = currentModalProduct.name;
+                closeProductModal();
+                selectProductInForm(name);
+            }
+        });
+
+        // ==========================================
+        // FORM PEMESANAN (HANYA JENIS BARANG)
+        // ==========================================
+        const productSelect = document.getElementById('cust-product');
+        const qtyInput = document.getElementById('cust-qty');
+        const waTargetSelect = document.getElementById('cust-wa-target');
+        const orderTotalEl = document.getElementById('order-total');
+        const orderBreakdownEl = document.getElementById('order-breakdown');
+
+        function getSelectedWhatsAppNumber() {
+            return (waTargetSelect && waTargetSelect.value) || ADMIN_WA;
+        }
+
+        function updateOrderTotal() {
+            const selectedOption = productSelect.options[productSelect.selectedIndex];
+            const unitPrice = Number(selectedOption.dataset.price || 0);
+            const itemName = selectedOption.value;
+            const qty = Math.max(1, Number(qtyInput.value || 1));
+            const total = unitPrice * qty;
+
+            orderTotalEl.textContent = formatRupiah(total);
+            orderBreakdownEl.textContent = `${qty}x ${itemName} (Motif Perca Random)`;
+        }
+
+        productSelect.addEventListener('change', updateOrderTotal);
+        qtyInput.addEventListener('input', updateOrderTotal);
+
+        document.getElementById('order-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const selectedOption = productSelect.options[productSelect.selectedIndex];
+            const itemName = selectedOption.value;
+            const unitPrice = Number(selectedOption.dataset.price || 0);
+            const qty = Math.max(1, Number(qtyInput.value || 1));
+            const total = unitPrice * qty;
+            const targetWa = getSelectedWhatsAppNumber();
+            const name = document.getElementById('cust-name').value.trim();
+            const note = document.getElementById('cust-note').value.trim();
+
+            let waText = `Halo Jahit.in! 🪡\n\nNama: *${name}*\nJenis Barang: *${itemName}* (${formatRupiah(unitPrice)})\nJumlah: *${qty} pcs*\nMotif/Model: *Random kain perca*\nEstimasi Total: *${formatRupiah(total)}*`;
+            if (note) {
+                waText += `\nCatatan: ${note}`;
+            }
+
+            const url = `https://wa.me/${targetWa}?text=${encodeURIComponent(waText)}`;
+            showToast("Membuka WhatsApp pemesanan Jahit.in...");
+            window.open(url, '_blank', 'noopener,noreferrer');
+        });
+
+        // ==========================================
+        // UTILITAS: SALIN NOMOR, TOAST & MENU MOBILE
+        // ==========================================
+        function showToast(msg) {
+            const toast = document.getElementById('toast-box');
+            document.getElementById('toast-msg').textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            }, 10);
+            setTimeout(() => {
+                toast.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => toast.classList.add('hidden'), 300);
+            }, 3000);
+        }
+
+        function copyPhone(event, phone) {
+            event.preventDefault();
+            event.stopPropagation();
+            const tempInput = document.createElement('input');
+            tempInput.value = phone;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast(`Nomor ${phone} berhasil disalin!`);
+        }
+
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+
+        function setMobileMenuState(isOpen) {
+            mobileMenu.classList.toggle('hidden', !isOpen);
+            iconOpen.classList.toggle('hidden', isOpen);
+            iconClose.classList.toggle('hidden', !isOpen);
+            mobileBtn.setAttribute('aria-expanded', String(isOpen));
+        }
+
+        mobileBtn.addEventListener('click', () => {
+            const isCurrentlyHidden = mobileMenu.classList.contains('hidden');
+            setMobileMenuState(isCurrentlyHidden);
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                setMobileMenuState(false);
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                setMobileMenuState(false);
+            }
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                iconOpen.classList.remove('hidden');
+                iconClose.classList.add('hidden');
+            });
+        });
+
+        function handleScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 80) {
+                    el.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScrollReveal);
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateOrderTotal();
+            handleScrollReveal();
+        });
+    </script>
+</body>
+
+</html>
